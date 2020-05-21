@@ -21,13 +21,16 @@ export default function InfiniteScroll({
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const isIntersecting = useIntersection(loadingRef, { threshold: 1.0 });
+  const isIntersecting = useIntersection(loadingRef, {
+    threshold: 1.0,
+    rootMargin: '140px'
+  });
 
   const loadMore = useCallback(async () => {
     setLoading(true);
     const url = `${baseUrl}?offset=${offset.current}&limit=${limit}`;
     const { results } = await fetcher(url);
-    
+
     setData(prevData => [...prevData, ...results])
     offset.current += 20;
     setLoading(false);
@@ -43,12 +46,10 @@ export default function InfiniteScroll({
         <div className="scroll-container__grid">
           {data.map(item => render(item.name))}
         </div>
-        {loading && 
-          <p className="scroll-container__loader">
-            Cargando...
-          </p>
-        }
-        <div 
+        <p className="scroll-container__loader">
+          {loading ? 'Cargando...' : ''}
+        </p>
+        <div
           ref={loadingRef}
           className="scroll-container__reference">
         </div>
