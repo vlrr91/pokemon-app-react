@@ -10,3 +10,20 @@
   font-weight: 400;
   font-size: 1.2em;
 }
+.scroll-container__not-content {
+  color: var(--secondary-color);
+  text-align: center;
+  font-size: 1.2em;
+}
+.scroll-container__button {
+  background-color: var(--secondary-color);
+  color: var(--light-color);
+  border: none;
+  padding: .5rem 1rem;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+}
+.scroll-container__reference {
+  height: 40px;
+}

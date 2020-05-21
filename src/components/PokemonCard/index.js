@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
+// Utils
+import { fetcher } from '../../utils/fetcher';
+
+// Styles
 import './PokemonCard.css';
 
 export default function PokemonCard({ pokemonName }) {
@@ -6,8 +11,8 @@ export default function PokemonCard({ pokemonName }) {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`);
-      const { name, sprites, types } = await response.json();
+      const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`;
+      const { name, sprites, types } = await fetcher(url);
       const { front_default: img } = sprites;
       const pokemonTypes = types.map(item => item.type.name);
       

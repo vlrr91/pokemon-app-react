@@ -1,46 +1,64 @@
-import React, { useRef, useEffect, useState } from 'react';
-import './InfiniteScroll.css';
-import PokemonCard from '../PokemonCard';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
+// Utils
+import { fetcher } from '../../utils/fetcher';
+
+// Hooks
 import useIntersection from '../../hooks/useIntersection';
 
-export default function InfiniteScroll() {
+// Styles
+import './InfiniteScroll.css';
+
+export default function InfiniteScroll({
+  initialOffset,
+  limit,
+  baseUrl,
+  render
+}) {
   const loadingRef = useRef(null);
-  const offset = useRef(0);
+  const offset = useRef(initialOffset);
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const isIntersecting = useIntersection(loadingRef, { threshold: 1.0 });
 
-  function loadMore() {
-    fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset.current}&limit=20`)
-      .then(res => res.json())
-      .then(newData => {
-        setData(prevData => [...prevData, ...newData.results])
-        offset.current += 20;
-      });
-  }
+  const loadMore = useCallback(async () => {
+    setLoading(true);
+    const url = `${baseUrl}?offset=${offset.current}&limit=${limit}`;
+    const { results } = await fetcher(url);
+    
+    setData(prevData => [...prevData, ...results])
+    offset.current += 20;
+    setLoading(false);
+  }, [baseUrl, limit]);
 
   useEffect(() => {
     if (isIntersecting) loadMore();
-  }, [isIntersecting]);
+  }, [isIntersecting, loadMore]);
+
+  if (render) {
+    return (
+      <div className="scroll-container">
+        <div className="scroll-container__grid">
+          {data.map(item => render(item.name))}
+        </div>
+        {loading && 
+          <p className="scroll-container__loader">
+            Cargando...
+          </p>
+        }
+        <div 
+          ref={loadingRef}
+          className="scroll-container__reference">
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="scroll-container">
-      <div className="scroll-container__grid">
-        {data.map(item =>
-          <PokemonCard
-            key={item.name}
-            pokemonName={item.name}
-          />
-        )}
-      </div>
-      <div 
-        ref={loadingRef}
-        className="scroll-container__loader"
-      >
-        Cargando...
-      </div>
+    <div className="scroll-container__not-content">
+      No hay contenido
     </div>
   );
 }
