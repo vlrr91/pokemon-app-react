@@ -1,38 +1,37 @@
-.App {
-  text-align: center;
+:root {
+  --primary-color: #e3350d;
+  --secondary-color: #4DAD5B;
+  --text-color: #222;
+  --light-color: #FFF;
+  --border-color: #DDD;
+  --normal-pokemon: #ACA493;
+  --fighting-pokemon: #7C311B;
+  --flying-pokemon: #5C72D3;
+  --poison-pokemon: #914493;
+  --ground-pokemon: #CDAC52;
+  --rock-pokemon: #B59D52;
+  --bug-pokemon: #8A980F;
+  --ghost-pokemon: #5C5CAE;
+  --steel-pokemon: #8D8D9F;
+  --fire-pokemon: #C62000;
+  --water-pokemon: #0A66C2;
+  --grass-pokemon: #72C135;
+  --electric-pokemon: #F9B716;
+  --psychic-pokemon: #E7417A;
+  --ice-pokemon: #6DD3F5;
+  --dragon-pokemon: #5F4BBA;
+  --dark-pokemon: #4F3A2D;
+  --fairy-pokemon: #E79AE7;
+  --unknown-pokemon: #162C37;
+  --shadow-pokemon: #682EBE;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*,
+*::before,
+*::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Rubik', sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main {
+  margin: 1.5em;
 }

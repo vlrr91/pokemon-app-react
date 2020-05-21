@@ -1,0 +1,13 @@
+.header {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border-radius: 0 0 15px 15px;
+  padding: 1.5em;
+}
+.header__title {
+  position: relative;
+  margin: 0;
+  font-size: 40px;
+  z-index: 1;
+  letter-spacing: 2px;
+}
