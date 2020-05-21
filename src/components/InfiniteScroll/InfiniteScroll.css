@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 15px;
+  max-width: 370px;
+  margin: 0 auto;
 }
 .scroll-container__loader {
   text-align: center;
@@ -26,4 +28,23 @@
 }
 .scroll-container__reference {
   height: 40px;
+}
+@media screen and (min-width: 640px) {
+  .scroll-container__grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+    max-width: 700px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .scroll-container__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1000px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .scroll-container__grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    max-width: 1220px;
+  }
 }
